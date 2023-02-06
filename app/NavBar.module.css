@@ -1,0 +1,8 @@
+.nonActive {
+  color: inherit;
+}
+
+.active {
+  color: green;
+  text-decoration: underline;
+}
