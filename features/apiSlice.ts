@@ -1,15 +1,23 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export const satangApi = createApi({
-  reducerPath: 'satangApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://satangcorp.com/api/v3/ticker',
-  }),
-  endpoints: (builder) => ({
-    getSymbol: builder.query({
-      query: (pathname: string) => `/24hr?symbol=${pathname}`,
-    }),
-  }),
+interface symbolState {
+  value: any;
+}
+
+const initialState: symbolState = {
+  value: [],
+};
+
+export const apiSlice = createSlice({
+  name: 'api',
+  initialState,
+  reducers: {
+    fetchSymbol: (state, action: PayloadAction<[]>) => {
+      state.value.push(action.payload);
+    },
+  },
 });
 
-export const { useGetSymbolQuery } = satangApi;
+export const { fetchSymbol } = apiSlice.actions;
+
+export default apiSlice.reducer;
